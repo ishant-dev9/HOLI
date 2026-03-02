@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', function() {
         game: document.getElementById('game-section')
     };
 
-    const startBtn = document.getElementById('start-btn');
+    const startBtn = document.getElementById('startBtn');
     const toGameBtn = document.getElementById('to-game-btn');
     const restartBtn = document.getElementById('restart-btn');
 

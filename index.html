@@ -8,7 +8,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="./style.css">
+    <script src="./script.js" defer></script>
 </head>
 <body>
 
@@ -16,8 +17,8 @@
     <div id="confetti-container"></div>
 
     <!-- Floating Mascots -->
-    <img src="assets/cat-top.gif" alt="Mascot Top" class="mascot mascot-top" id="mascot-top">
-    <img src="assets/cat-bottom.gif" alt="Mascot Bottom" class="mascot mascot-bottom" id="mascot-bottom">
+    <img src="./assets/cat-top.gif" alt="Mascot Top" class="mascot mascot-top" id="mascot-top">
+    <img src="./assets/cat-bottom.gif" alt="Mascot Bottom" class="mascot mascot-bottom" id="mascot-bottom">
 
     <!-- Main Container -->
     <main id="main-content">
@@ -34,7 +35,7 @@
                     <span class="manika-name">MANIKA</span>
                 </div>
 
-                <button id="start-btn" class="primary-btn">Start the Celebration</button>
+                <button type="button" id="startBtn" class="primary-btn">Start the Celebration</button>
                 <p class="footer-text">Made with rang and care</p>
             </div>
         </section>
@@ -83,7 +84,7 @@
                 
                 <div id="game-canvas-container">
                     <div id="basket">
-                        <img src="assets/basket.png" alt="Basket">
+                        <img src="./assets/basket.png" alt="Basket">
                     </div>
                 </div>
 
@@ -101,9 +102,9 @@
 
     <!-- Audio (Optional, user can add) -->
     <audio id="bg-music" loop>
-        <source src="assets/music.mp3" type="audio/mpeg">
+        <source src="./assets/music.mp3" type="audio/mpeg">
     </audio>
 
-    <script src="./script.js"></script>
+    <!-- <script src="./script.js"></script> -->
 </body>
 </html>
