@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Holi Special 2026 | For Manika</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Background Confetti Container -->
+    <div id="confetti-container"></div>
+
+    <!-- Floating Mascots -->
+    <img src="assets/cat-top.gif" alt="Mascot Top" class="mascot mascot-top" id="mascot-top">
+    <img src="assets/cat-bottom.gif" alt="Mascot Bottom" class="mascot mascot-bottom" id="mascot-bottom">
+
+    <!-- Main Container -->
+    <main id="main-content">
+        
+        <!-- Section 1: Hero Screen -->
+        <section id="hero-section" class="active">
+            <div class="glass-card">
+                <p class="subtitle">A LITTLE HOLI SURPRISE IS WAITING FOR YOU.</p>
+                <h1 class="main-heading">Holi Special 2026</h1>
+                <p class="subtext">Soft colors, warm vibes, and one heartfelt note.</p>
+                
+                <div class="name-tag">
+                    <span>Made specially for</span>
+                    <span class="manika-name">MANIKA</span>
+                </div>
+
+                <button id="start-btn" class="primary-btn">Start the Celebration</button>
+                <p class="footer-text">Made with rang and care</p>
+            </div>
+        </section>
+
+        <!-- Section 2: Unlock Interaction -->
+        <section id="unlock-section">
+            <div class="glass-card">
+                <h2 class="section-title">Splash colors to unlock your note</h2>
+                <div class="splash-interaction-area" id="splash-area">
+                    <!-- Splashes will appear here -->
+                </div>
+                <div class="color-palette">
+                    <div class="color-circle" data-color="#FFB7B2" style="background: #FFB7B2;"></div>
+                    <div class="color-circle" data-color="#B2E2F2" style="background: #B2E2F2;"></div>
+                    <div class="color-circle" data-color="#B2F2BB" style="background: #B2F2BB;"></div>
+                    <div class="color-circle" data-color="#F2E2B2" style="background: #F2E2B2;"></div>
+                </div>
+                <p class="progress-text">Splashes: <span id="splash-count">0</span>/4</p>
+            </div>
+        </section>
+
+        <!-- Section 3: Message Card -->
+        <section id="message-section">
+            <div class="glass-card message-card">
+                <div class="message-content">
+                    <p class="dear">Dear MANIKA,</p>
+                    <p class="message-body">
+                        May this Holi bring soft colors to your days and warmth to your heart. 
+                        You make things lighter, easier, and brighter.
+                    </p>
+                    <p class="happy-holi">Happy Holi. 🌸</p>
+                </div>
+                <button id="to-game-btn" class="primary-btn">Play a Game</button>
+            </div>
+        </section>
+
+        <!-- Section 4: Game Section -->
+        <section id="game-section">
+            <div class="glass-card game-card">
+                <h2 class="game-title">Catch the Colors</h2>
+                <div class="game-stats">
+                    <div class="stat">Caught: <span id="score">0</span></div>
+                    <div class="stat">Missed: <span id="missed">0</span>/3</div>
+                    <div class="stat">Goal: <span id="goal">12</span></div>
+                </div>
+                
+                <div id="game-canvas-container">
+                    <div id="basket">
+                        <img src="assets/basket.png" alt="Basket">
+                    </div>
+                </div>
+
+                <div id="game-over-overlay" class="hidden">
+                    <div class="overlay-content">
+                        <h3 id="game-result-title">Game Over!</h3>
+                        <p id="game-result-text">You caught 0 colors.</p>
+                        <button id="restart-btn" class="primary-btn">Try Again</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Audio (Optional, user can add) -->
+    <audio id="bg-music" loop>
+        <source src="assets/music.mp3" type="audio/mpeg">
+    </audio>
+
+    <script src="script.js"></script>
+</body>
+</html>
