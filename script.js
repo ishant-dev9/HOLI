@@ -3,7 +3,7 @@
  * Holi Special Interactive Website Logic
  */
 
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', function() {
     
     // --- ELEMENTS ---
     const sections = {
@@ -13,11 +13,9 @@ document.addEventListener('DOMContentLoaded', () => {
         game: document.getElementById('game-section')
     };
 
-    const buttons = {
-        start: document.getElementById('start-btn'),
-        toGame: document.getElementById('to-game-btn'),
-        restart: document.getElementById('restart-btn')
-    };
+    const startBtn = document.getElementById('start-btn');
+    const toGameBtn = document.getElementById('to-game-btn');
+    const restartBtn = document.getElementById('restart-btn');
 
     const splashArea = document.getElementById('splash-area');
     const splashCountDisplay = document.getElementById('splash-count');
@@ -42,25 +40,32 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- NAVIGATION ---
     function setupNavigation() {
-        buttons.start.addEventListener('click', () => {
-            transitionTo('unlock');
-        });
+        if (startBtn) {
+            startBtn.addEventListener('click', function() {
+                console.log("Start button clicked");
+                transitionTo('unlock');
+            });
+        }
 
-        buttons.toGame.addEventListener('click', () => {
-            transitionTo('game');
-            startGame();
-        });
+        if (toGameBtn) {
+            toGameBtn.addEventListener('click', function() {
+                transitionTo('game');
+                startGame();
+            });
+        }
 
-        buttons.restart.addEventListener('click', () => {
-            resetGame();
-            startGame();
-        });
+        if (restartBtn) {
+            restartBtn.addEventListener('click', function() {
+                resetGame();
+                startGame();
+            });
+        }
     }
 
     function transitionTo(sectionKey) {
         // Fade out current
         Object.values(sections).forEach(s => {
-            if (s.classList.contains('active')) {
+            if (s && s.classList.contains('active')) {
                 s.style.opacity = '0';
                 s.style.transform = 'translateY(-20px)';
                 setTimeout(() => {
@@ -69,12 +74,14 @@ document.addEventListener('DOMContentLoaded', () => {
                     
                     // Show new
                     const next = sections[sectionKey];
-                    next.style.display = 'block';
-                    setTimeout(() => {
-                        next.classList.add('active');
-                        next.style.opacity = '1';
-                        next.style.transform = 'translateY(0)';
-                    }, 50);
+                    if (next) {
+                        next.style.display = 'block';
+                        setTimeout(() => {
+                            next.classList.add('active');
+                            next.style.opacity = '1';
+                            next.style.transform = 'translateY(0)';
+                        }, 50);
+                    }
                 }, 800);
             }
         });
@@ -83,6 +90,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- CONFETTI BACKGROUND ---
     function initConfetti() {
         const container = document.getElementById('confetti-container');
+        if (!container) return;
         const colors = ['#FFB7B2', '#B2E2F2', '#B2F2BB', '#F2E2B2', '#FFD700', '#FF8A8A'];
         
         for (let i = 0; i < 50; i++) {
@@ -117,6 +125,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- SPLASH INTERACTION ---
     function setupSplashInteraction() {
+        if (!splashArea) return;
+        
         colorCircles.forEach(circle => {
             circle.addEventListener('click', () => {
                 colorCircles.forEach(c => c.classList.remove('selected'));
@@ -133,7 +143,7 @@ document.addEventListener('DOMContentLoaded', () => {
             createSplash(x, y);
             
             currentSplashCount++;
-            splashCountDisplay.textContent = currentSplashCount;
+            if (splashCountDisplay) splashCountDisplay.textContent = currentSplashCount;
             
             if (currentSplashCount === 4) {
                 setTimeout(() => {
@@ -147,10 +157,8 @@ document.addEventListener('DOMContentLoaded', () => {
         const splash = document.createElement('div');
         splash.className = 'color-splash';
         
-        // Using a placeholder SVG or simple div with background
-        // For production, use splash1.png, splash2.png etc.
         const splashImages = [
-            'https://cdn-icons-png.flaticon.com/512/5900/5900543.png', // Placeholder splash
+            'https://cdn-icons-png.flaticon.com/512/5900/5900543.png',
             'https://cdn-icons-png.flaticon.com/512/5900/5900547.png',
             'https://cdn-icons-png.flaticon.com/512/5900/5900551.png'
         ];
@@ -174,6 +182,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function setupGame() {
         const container = document.getElementById('game-canvas-container');
         const basket = document.getElementById('basket');
+        if (!container || !basket) return;
         
         // Mouse movement for basket
         container.addEventListener('mousemove', (e) => {
@@ -181,7 +190,6 @@ document.addEventListener('DOMContentLoaded', () => {
             const rect = container.getBoundingClientRect();
             let x = e.clientX - rect.left;
             
-            // Constrain basket within container
             const basketWidth = basket.offsetWidth;
             if (x < basketWidth / 2) x = basketWidth / 2;
             if (x > rect.width - basketWidth / 2) x = rect.width - basketWidth / 2;
@@ -212,7 +220,8 @@ document.addEventListener('DOMContentLoaded', () => {
         gameState.drops = [];
         updateGameStats();
         
-        document.getElementById('game-over-overlay').classList.add('hidden');
+        const overlay = document.getElementById('game-over-overlay');
+        if (overlay) overlay.classList.add('hidden');
         
         gameLoop();
     }
@@ -228,6 +237,8 @@ document.addEventListener('DOMContentLoaded', () => {
         // Update drops
         const container = document.getElementById('game-canvas-container');
         const basket = document.getElementById('basket');
+        if (!container || !basket) return;
+        
         const basketRect = basket.getBoundingClientRect();
         const containerRect = container.getBoundingClientRect();
 
@@ -272,6 +283,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function spawnDrop() {
         const container = document.getElementById('game-canvas-container');
+        if (!container) return;
         const colors = ['#FFB7B2', '#B2E2F2', '#B2F2BB', '#F2E2B2', '#FF8A8A'];
         
         const drop = document.createElement('div');
@@ -294,8 +306,10 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function updateGameStats() {
-        document.getElementById('score').textContent = gameState.score;
-        document.getElementById('missed').textContent = gameState.missed;
+        const scoreEl = document.getElementById('score');
+        const missedEl = document.getElementById('missed');
+        if (scoreEl) scoreEl.textContent = gameState.score;
+        if (missedEl) missedEl.textContent = gameState.missed;
     }
 
     function endGame(win) {
@@ -304,14 +318,14 @@ document.addEventListener('DOMContentLoaded', () => {
         const title = document.getElementById('game-result-title');
         const text = document.getElementById('game-result-text');
         
-        overlay.classList.remove('hidden');
+        if (overlay) overlay.classList.remove('hidden');
         
         if (win) {
-            title.textContent = "You Won! 🎉";
-            text.textContent = `Amazing! You caught all ${gameState.score} colors for Manika.`;
+            if (title) title.textContent = "You Won! 🎉";
+            if (text) text.textContent = `Amazing! You caught all ${gameState.score} colors for Manika.`;
         } else {
-            title.textContent = "Game Over";
-            text.textContent = `You caught ${gameState.score} colors. Try again to reach 12!`;
+            if (title) title.textContent = "Game Over";
+            if (text) text.textContent = `You caught ${gameState.score} colors. Try again to reach 12!`;
         }
         
         // Clean up remaining drops
